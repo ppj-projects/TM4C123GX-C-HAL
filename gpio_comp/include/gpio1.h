@@ -1,3 +1,7 @@
+#ifndef GPIO1_COMP_H
+#define GPIO1_COMP_H
+
+// Memory access 
 // Direct Memory Mapping
 #define HWREG32_RW(x) (*((uint32_t volatile *)(x)))
 #define HWREG32_RO(x) (*((uint32_t volatile const *)(x)))
@@ -48,3 +52,126 @@
 #define GPIOE_RO_REG(x) HWREG32_RO((GPIOE_BASE) + (x))
 #define GPIOF_RW_REG(x) HWREG32_RW((GPIOF_BASE) + (x))
 #define GPIOF_RO_REG(x) HWREG32_RO((GPIOF_BASE) + (x))
+
+// GPIO Peripheral enums
+// Different available AFs
+typedef enum
+{
+	IO,
+	CAN,
+	UART,
+	I2C,
+	SSI,
+	PWM,
+	TIMER,
+	USB
+}GpioAF_t;
+
+// Different available IOs
+typedef enum
+{
+	GPIOA,
+	GPIOB,
+	GPIOC,
+	GPIOD,
+	GPIOE,
+	GPIOF,
+	MAX_GPIO_PORTS
+}GpioPort_t;
+
+typedef enum
+{
+	PIN1,
+	PIN2,
+	PIN3,
+	PIN4,
+	PIN5,
+	PIN6,
+	PIN7,
+	MAX_GPIO_PIN_CHANNELS
+}GpioPinChannel_t;
+
+typedef enum
+{
+	INPUT,
+	OUTPUT,
+}GpioDirection_t;
+
+typedef enum
+{
+	PULLUP,
+	PULLDOWN,
+	PUSH,
+	PULL,
+	OPENDRAIN
+}GpioIoPadConfig_t;
+
+typedef enum
+{
+	TWO,
+	FOUR,
+	EIGHT
+}GpioCurrentStrength_t;
+
+// Different available CANs
+typedef enum
+{
+   	CAN0,
+   	CAN1,
+   	CAN2
+}GpioCan_t;
+
+// Different available UARTs
+typedef enum
+{
+	UART0,
+	UART1,
+	UART2,
+	UART3,
+	UART4,
+	UART5,
+	UART6,
+	UART7
+}GpioUart_t;
+
+// Different available I2Cs
+typedef enum
+{
+	I2C0,
+	I2C1,
+	I2C2,
+	I2C3
+}GpioI2c_t;
+
+// Different available SSIs
+typedef enum
+{
+	SSI0,
+	SSI1,
+	SSI2,
+	SSI3,
+}GpioSsi_t;
+
+// Different available Timers
+typedef enum
+{
+	TIMER0,
+	TIMER1,
+	TIMER2,
+	TIMER3,
+	TIMER4,
+	TIMER5
+}GpioTimer_t;
+
+
+// GPIO config functions
+void Gpio_configure();
+
+void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t dir);
+void Gpio_configure_can(GpioCan_t can_periph);
+void Gpio_configure_uart(GpioUart_t uart_periph);
+void Gpio_configure_i2c(GpioI2c_t i2c_periph);
+void Gpio_configure_ssi(GpioSsi_t ssi_periph);
+void Gpio_configure_timer(GpioTimer_t timer_periph);
+
+#endif
