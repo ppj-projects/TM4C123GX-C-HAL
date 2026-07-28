@@ -1,5 +1,8 @@
 #include "gpio1.h"
 
+// This couples sys_ctrl with gpio
+#include "sys_ctrl1.h"
+
 // GPIO Port Control (GPIOPCTL) values
 // CAN
 static const uint8_t * GPIOPCTL_CAN_PERIPHERAL_PINS[4] = 
@@ -180,3 +183,73 @@ static const uint8_t GPIOPCTL_USB0[] =
 };
 
 
+// GPIO config functions
+void Gpio_configure(GpioPort_t port)
+{
+	// Set GPIO bus. Just comment for demonstration. Default will always be APB
+	// Sysctrl_configure_gpio_bus((Sysctrl_GpioPort_t)port, Sysctrl_bus_t::APB);
+
+	// Enable port
+	// Check if already enabled. Need getter
+	Sysctrl_configure_gpio_port((Sysctrl_GpioPort_t)port, true);
+
+	return;
+}
+
+void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t dir)
+{
+	uint32_t dir_val = ((dir == INPUT)? 1 : 0 ) << pin;
+	uint32_t afsel_val = 0 << pin;
+	uint32_t drive_val = 1 << pin;
+	uint32_t den_val = 1 << pin;
+	Gpio_configure(port);
+
+	switch(port)
+	{
+	case GPIOA:
+		GPIOA_RW_REG(GPIODIR) = dir_val;
+		GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
+		GPIOA_RW_REG(GPIODR4R) = drive_val;
+		GPIOA_RW_REG(GPIODEN) = den_val;
+		break;
+	case GPIOB:
+		GPIOB_RW_REG(GPIODIR) = dir_val;
+		GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
+		GPIOB_RW_REG(GPIODR4R) = drive_val;
+                GPIOB_RW_REG(GPIODEN) = den_val;
+                break;
+	case GPIOC:
+		GPIOC_RW_REG(GPIODIR) = dir_val;
+		GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
+		GPIOC_RW_REG(GPIODR4R) = drive_val;
+                GPIOC_RW_REG(GPIODEN) = den_val;
+                break;
+	case GPIOD:
+		GPIOD_RW_REG(GPIODIR) = dir_val;
+		GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
+		GPIOD_RW_REG(GPIODR4R) = drive_val;
+                GPIOD_RW_REG(GPIODEN) = den_val;
+                break;
+	case GPIOE:
+		GPIOE_RW_REG(GPIODIR) = dir_val;
+		GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
+		GPIOE_RW_REG(GPIODR4R) = drive_val;
+                GPIOE_RW_REG(GPIODEN) = den_val;
+                break;
+	case GPIOF:
+		GPIOF_RW_REG(GPIODIR) = dir_val;
+		GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
+		GPIOF_RW_REG(GPIODR4R) = drive_val;
+                GPIOF_RW_REG(GPIODEN) = den_val;
+                break;
+	}
+
+	return;
+}
+
+
+void Gpio_configure_can(GpioCan_t can_periph);
+void Gpio_configure_uart(GpioUart_t uart_periph);
+void Gpio_configure_i2c(GpioI2c_t i2c_periph);
+void Gpio_configure_ssi(GpioSsi_t ssi_periph);
+void Gpio_configure_timer(GpioTimer_t timer_periph);
