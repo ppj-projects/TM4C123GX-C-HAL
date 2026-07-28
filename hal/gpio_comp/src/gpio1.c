@@ -16,10 +16,22 @@ static const uint8_t GPIOPCTL_CAN0PB[] =
     8,  // PB5 (CAN0Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_CAN0PB[] =
+{
+    {GPIOB, PIN4, 8}, // PB4 (CAN0Rx)
+    {GPIOB, PIN5, 8}, // PB5 (CAN0Tx)
+};
+
 static const uint8_t GPIOPCTL_CAN0PE[] =
 {
     8,  // PE4 (CAN0Rx)
     8,  // PE5 (CAN0Tx)
+};
+
+static const GpioPctl_t GPIOPCTL_CAN0PE[] =
+{
+    {GPIOE, PIN4, 8}, // PE4 (CAN0Rx)
+    {GPIOE, PIN5, 8}, // PE5 (CAN0Tx)
 };
 
 static const uint8_t GPIOPCTL_CAN0PF[] =
@@ -28,10 +40,22 @@ static const uint8_t GPIOPCTL_CAN0PF[] =
     3,  // PF3 (CAN0Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_CAN0PF[] =
+{
+    {GPIOF, PIN0, 3}, // PF0 (CAN0Rx)
+    {GPIOF, PIN3, 3}, // PF3 (CAN0Tx)
+};
+
 static const uint8_t GPIOPCTL_CAN1[] =
 {
     8,  // PA0 (CAN1Rx)
     8,  // PA1 (CAN1Tx)
+};
+
+static const GpioPctl_t GPIOPCTL_CAN1[] =
+{
+    {GPIOA, PIN0, 8}, // PA0 (CAN1Rx)
+    {GPIOA, PIN1, 8}, // PA1 (CAN1Tx)
 };
 
 // UART
@@ -173,10 +197,22 @@ static const uint8_t GPIOPCTL_I2C0[] =
     3,  // PB3 (I2C0SDA)
 };
 
+static const GpioPctl_t GPIOPCTL_I2C0[] =
+{
+    {GPIOB, PIN2, 3}, // PB2 (I2C0SCL)
+    {GPIOB, PIN3, 3}, // PB3 (I2C0SDA)
+};
+
 static const uint8_t GPIOPCTL_I2C1[] =
 {
     3,  // PA6 (I2C1SCL)
     3,  // PA7 (I2C1SDA)
+};
+
+static const GpioPctl_t GPIOPCTL_I2C1[] =
+{
+    {GPIOA, PIN6, 3}, // PA6 (I2C1SCL)
+    {GPIOA, PIN7, 3}, // PA7 (I2C1SDA)
 };
 
 static const uint8_t GPIOPCTL_I2C2[] =
@@ -185,10 +221,22 @@ static const uint8_t GPIOPCTL_I2C2[] =
     3,  // PE5 (I2C2SDA)
 };
 
+static const GpioPctl_t GPIOPCTL_I2C2[] =
+{
+    {GPIOE, PIN4, 3}, // PE4 (I2C2SCL)
+    {GPIOE, PIN5, 3}, // PE5 (I2C2SDA)
+};
+
 static const uint8_t GPIOPCTL_I2C3[] =
 {
     3,  // PD0 (I2C3SCL)
     3,  // PD1 (I2C3SDA)
+};
+
+static const GpioPctl_t GPIOPCTL_I2C3[] =
+{
+    {GPIOD, PIN0, 3}, // PD0 (I2C3SCL)
+    {GPIOD, PIN1, 3}, // PD1 (I2C3SDA)
 };
 
 // SSI
@@ -205,6 +253,14 @@ static const uint8_t GPIOPCTL_SSI0[] =
     2,  // PA5 (SSI0Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_SSI0[] =
+{
+    {GPIOA, PIN2, 2}, // PA2 (SSI0Clk)
+    {GPIOA, PIN3, 2}, // PA3 (SSI0Fss)
+    {GPIOA, PIN4, 2}, // PA4 (SSI0Rx)
+    {GPIOA, PIN5, 2}, // PA5 (SSI0Tx)
+};
+
 static const uint8_t GPIOPCTL_SSI1[] =
 {
     2,  // PD0 (SSI1Clk)
@@ -217,6 +273,19 @@ static const uint8_t GPIOPCTL_SSI1[] =
     2,  // PF3 (SSI1Fss)
 };
 
+static const GpioPctl_t GPIOPCTL_SSI1[] =
+{
+    {GPIOD, PIN0, 2}, // PD0 (SSI1Clk)
+    {GPIOD, PIN1, 2}, // PD1 (SSI1Fss)
+    {GPIOD, PIN2, 2}, // PD2 (SSI1Rx)
+    {GPIOD, PIN3, 2}, // PD3 (SSI1Tx)
+
+    {GPIOF, PIN0, 2}, // PF0 (SSI1Rx)
+    {GPIOF, PIN1, 2}, // PF1 (SSI1Tx)
+    {GPIOF, PIN2, 2}, // PF2 (SSI1Clk)
+    {GPIOF, PIN3, 2}, // PF3 (SSI1Fss)
+};
+
 static const uint8_t GPIOPCTL_SSI2[] =
 {
     2,  // PB4 (SSI2Clk)
@@ -225,12 +294,28 @@ static const uint8_t GPIOPCTL_SSI2[] =
     2,  // PB7 (SSI2Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_SSI2[] =
+{
+    {GPIOB, PIN4, 2}, // PB4 (SSI2Clk)
+    {GPIOB, PIN5, 2}, // PB5 (SSI2Fss)
+    {GPIOB, PIN6, 2}, // PB6 (SSI2Rx)
+    {GPIOB, PIN7, 2}, // PB7 (SSI2Tx)
+};
+
 static const uint8_t GPIOPCTL_SSI3[] =
 {
     1,  // PD0 (SSI3Clk)
     1,  // PD1 (SSI3Fss)
     1,  // PD2 (SSI3Rx)
     1,  // PD3 (SSI3Tx)
+};
+
+static const GpioPctl_t GPIOPCTL_SSI3[] =
+{
+    {GPIOD, PIN0, 1}, // PD0 (SSI3Clk)
+    {GPIOD, PIN1, 1}, // PD1 (SSI3Fss)
+    {GPIOD, PIN2, 1}, // PD2 (SSI3Rx)
+    {GPIOD, PIN3, 1}, // PD3 (SSI3Tx)
 };
 
 // USB
@@ -247,6 +332,21 @@ static const uint8_t GPIOPCTL_USB0[] =
 
     9,  // PC7 (USB0PFLT)
     9,  // PD3 (USB0PFLT)
+};
+
+static const GpioPctl_t GPIOPCTL_USB0[] =
+{
+    {GPIOB, PIN0, 1}, // PB0 (USB0ID)
+    {GPIOB, PIN1, 1}, // PB1 (USB0VBUS)
+    {GPIOD, PIN4, 1}, // PD4 (USB0DM)
+    {GPIOD, PIN5, 1}, // PD5 (USB0DP)
+
+    {GPIOC, PIN6, 9}, // PC6 (USB0EPEN)
+    {GPIOD, PIN2, 9}, // PD2 (USB0EPEN)
+    {GPIOF, PIN4, 9}, // PF4 (USB0EPEN)
+
+    {GPIOC, PIN7, 9}, // PC7 (USB0PFLT)
+    {GPIOD, PIN3, 9}, // PD3 (USB0PFLT)
 };
 
 
