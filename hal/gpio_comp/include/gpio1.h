@@ -163,6 +163,13 @@ typedef enum
 	TIMER5
 }GpioTimer_t;
 
+// Port, pin, and pin control information needed for AF
+typedef struct  __attribute__((packed))
+{
+        GpioPort_t port;
+        GpioPinChannel_t pin;
+        uint8_t pctl_val;
+}GpioPctl_t;
 
 // GPIO config functions
 void Gpio_configure();

@@ -46,17 +46,43 @@ static const uint8_t GPIOPCTL_UART0[] =
     1,  // PA1 (U0Tx)
 };
 
-static const uint8_t GPIOPCTL_UART1[] =
+static const GpioPctl_t GPIOPCTL_UART0[] = 
+{
+	{GPIOA, PIN0, 1}, // PA0 (U0Rx)
+	{GPIA1, PIN1, 1}  // PA1 (U0Tx)
+}
+
+static const uint8_t GPIOPCTL_UART1A[] =
 {
     1,  // PB0 (U1Rx)
     1,  // PB1 (U1Tx)
-    2,  // PC4 (U1Rx)
-    2,  // PC5 (U1Tx)
     14, // PC4 (U1RTS)
     14, // PC5 (U1CTS)
+};
+
+static const GpioPctl_t GPIOPCTL_UART1A[] = 
+{
+	{GPIOB, PIN0, 1},
+	{GPIOB, PIN1, 1},
+	{GPIOC, PIN4, 14},
+	{GPIOC, PIN5, 14}
+}
+
+static const uint8_t GPIOPCTL_UART1B[] = 
+{
+    2,  // PC4 (U1Rx)
+    2,  // PC5 (U1Tx)
     1,  // PF0 (U1RTS)
     1,  // PF1 (U1CTS)
-};
+}
+
+static const GpioPctl_t GPIOPCTL_UART1B[] = 
+{
+        {GPIOC, PIN4, 2},
+        {GPIOC, PIN5, 2},
+        {GPIOF, PIN0, 1},
+        {GPIOF, PIN1, 1}
+}
 
 static const uint8_t GPIOPCTL_UART2[] =
 {
@@ -64,11 +90,24 @@ static const uint8_t GPIOPCTL_UART2[] =
     1,  // PD7 (U2Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_UART2[] = 
+{
+	{GPIOD, PIN6, 1},
+	{GPIOD, PIN7, 1},
+}
+
 static const uint8_t GPIOPCTL_UART3[] =
 {
     1,  // PC6 (U3Rx)
     1,  // PC7 (U3Tx)
 };
+
+static const GpioPctl_t GPIOPCTL_UART2[] = 
+{
+        {GPIOC, PIN6, 1},
+        {GPIOC, PIN7, 1},
+}
+
 
 static const uint8_t GPIOPCTL_UART4[] =
 {
@@ -76,11 +115,25 @@ static const uint8_t GPIOPCTL_UART4[] =
     1,  // PC5 (U4Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_UART2[] = 
+{
+        {GPIOC, PIN4, 1},
+        {GPIOC, PIN5, 1},
+}
+
+
 static const uint8_t GPIOPCTL_UART5[] =
 {
     1,  // PE4 (U5Rx)
     1,  // PE5 (U5Tx)
 };
+
+static const GpioPctl_t GPIOPCTL_UART2[] = 
+{
+        {GPIOE, PIN4, 1},
+        {GPIOE, PIN5, 1},
+}
+
 
 static const uint8_t GPIOPCTL_UART6[] =
 {
@@ -88,11 +141,25 @@ static const uint8_t GPIOPCTL_UART6[] =
     1,  // PD5 (U6Tx)
 };
 
+static const GpioPctl_t GPIOPCTL_UART2[] = 
+{
+        {GPIOD, PIN4, 1},
+        {GPIOD, PIN5, 1},
+}
+
+
 static const uint8_t GPIOPCTL_UART7[] =
 {
     1,  // PE0 (U7Rx)
     1,  // PE1 (U7Tx)
 };
+
+static const GpioPctl_t GPIOPCTL_UART2[] = 
+{
+        {GPIOE, PIN0, 1},
+        {GPIOE, PIN1, 1},
+}
+
 
 // I2C
 static const uint8_t * GPIOPCTL_I2C_PERIPHERAL_PINS[4] = 
