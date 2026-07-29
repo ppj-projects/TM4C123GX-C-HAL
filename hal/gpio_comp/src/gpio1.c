@@ -253,51 +253,12 @@ void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t di
 	return;
 }
 
-
-void Gpio_configure_can(GpioCan_t can_periph)
+static void Gpio_configure_af_peripheral(GpioPctl_t periph_setting)
 {
-	uint32_t afsel_val = 1 << GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph].pin;
-	uint32_t pctl_val = GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph].pctl_val << (4 *  GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph].pin);
-	Gpio_configure(GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph].port);
+	uint32_t afsel_val = 1 << periph_setting.pin;
+        uint32_t pctl_val = periph_setting.pctl_val << (4 *periph_setting.pin);
 
-	switch(GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph].port)
-        {
-        case GPIOA:
-                GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOA_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOB:
-                GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOB_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOC:
-                GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOC_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOD:
-                GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOD_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOE:
-                GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOE_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOF:
-                GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOF_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        }
-
-	return;
-}
-
-void Gpio_configure_uart(GpioUart_t uart_periph)
-{
-	uint32_t afsel_val = 1 << GPIOPCTL_UART_PERIPHERAL_PINS[can_periph].pin;
-        uint32_t pctl_val = GPIOPCTL_UART_PERIPHERAL_PINS[can_periph].pctl_val << (4 * GPIOPCTL_UART_PERIPHERAL_PINS[can_periph].pin);
-        Gpio_configure(GPIOPCTL_UART_PERIPHERAL_PINS[can_periph].port);
-
-        switch(GPIOPCTL_UART_PERIPHERAL_PINS[can_periph].port)
+        switch(periph_setting.port)
         {
         case GPIOA:
                 GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
@@ -325,117 +286,45 @@ void Gpio_configure_uart(GpioUart_t uart_periph)
                 break;
         }
 
+        return;
+}
+
+void Gpio_configure_can(GpioCan_t can_periph)
+{
+	Gpio_configure(GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph].port);
+
+	Gpio_configure_af_peripheral(GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph]);
+}
+
+void Gpio_configure_uart(GpioUart_t uart_periph)
+{
+	Gpio_configure(GPIOPCTL_UART_PERIPHERAL_PINS[uart_periph].port);
+
+        Gpio_configure_af_peripheral(GPIOPCTL_UART_PERIPHERAL_PINS[uart_periph]);	
         return;
 }
 
 void Gpio_configure_i2c(GpioI2c_t i2c_periph)
 {
-	uint32_t afsel_val = 1 << GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph].pin;
-        uint32_t pctl_val = GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph].pctl_val << (4 * GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph].pin);
-        Gpio_configure(GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph].port);
+	Gpio_configure(GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph].port);
 
-        switch(GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph].port)
-        {
-        case GPIOA:
-                GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOA_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOB:
-                GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOB_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOC:
-                GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOC_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOD:
-                GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOD_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOE:
-                GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOE_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOF:
-                GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOF_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        }
-
+        Gpio_configure_af_peripheral(GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph]);
         return;
 }
 
 void Gpio_configure_ssi(GpioSsi_t ssi_periph)
 {
-	uint32_t afsel_val = 1 << GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph].pin;
-        uint32_t pctl_val = GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph].pctl_val << (4 * GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph].pin);
-        Gpio_configure(GPIOPCTL_UART_PERIPHERAL_PINS[ssi_periph].port);
+	Gpio_configure(GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph].port);
 
-        switch(GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph].port)
-        {
-        case GPIOA:
-                GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOA_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOB:
-                GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOB_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOC:
-                GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOC_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOD:
-                GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOD_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOE:
-                GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOE_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOF:
-                GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOF_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        }
-
+        Gpio_configure_af_peripheral(GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph]);
         return;
 }
 
 void Gpio_configure_timer(GpioTimer_t timer_periph)
 {
-	uint32_t afsel_val = 1 << GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph].pin;
-        uint32_t pctl_val = GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph].pctl_val << (4 * GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph].pin);
-        Gpio_configure(GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph].port);
+	Gpio_configure(GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph].port);
 
-        switch(GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph].port)
-        {
-        case GPIOA:
-                GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOA_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOB:
-                GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOB_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOC:
-                GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOC_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOD:
-                GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOD_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOE:
-                GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOE_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        case GPIOF:
-                GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
-                GPIOF_RW_REG(GPIOPCTL) = pctl_val;
-                break;
-        }
-
+        Gpio_configure_af_peripheral(GPIOPCTL_TIMER_PERIPHERAL_PINS[timer_periph]);
         return;
 }
 
