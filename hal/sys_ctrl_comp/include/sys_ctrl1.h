@@ -10,7 +10,7 @@
 #define SYSCTR32_RO(x) 	HWREG32_RO((SYSCTR_BASE) + (x))
 
 // System Control base address
-#define SYSCTR_BASE		0x400F'E000UL
+#define SYSCTR_BASE		0x400FE000UL
 
 // System Control register offsets
 #define DID0            0x000U

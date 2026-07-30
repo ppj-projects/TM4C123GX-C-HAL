@@ -7,20 +7,20 @@
 #define HWREG32_RO(x) (*((uint32_t volatile const *)(x)))
 
 // GPIO base addresses
-#define GPIOA_BASE	0x4000'4000U
-#define GPIOB_BASE	0x4000'5000U
-#define GPIOC_BASE	0x4000'6000U
-#define GPIOD_BASE	0x4000'7000U
-#define GPIOE_BASE	0x4000'8000U
-#define GPIOF_BASE	0x4000'9000U
+#define GPIOA_BASE	0x40004000U
+#define GPIOB_BASE	0x40005000U
+#define GPIOC_BASE	0x40006000U
+#define GPIOD_BASE	0x40007000U
+#define GPIOE_BASE	0x40008000U
+#define GPIOF_BASE	0x40009000U
 
 // GPIO register offsets
 #define GPIODATA	0x000U  // rw
-#define GPIODIR		0x400U 	// rw
-#define GPIOIS 		0x404U 	// rw
+#define GPIODIR	0x400U 	// rw
+#define GPIOIS 	0x404U 	// rw
 #define GPIOIBE 	0x408U 	// rw
 #define GPIOIEV 	0x40cU	// rw
-#define GPIOIM 		0x410U 	// rw
+#define GPIOIM 	0x410U 	// rw
 #define GPIORIS 	0x414U	// ro
 #define GPIOMIS 	0x418U	// ro
 #define GPIOICR 	0x41cU	// rw
@@ -32,8 +32,9 @@
 #define GPIOPUR 	0x510U	// rw
 #define GPIOPDR 	0x514U	// rw
 #define GPIOSLR 	0x518U	// rw
+#define GPIODEN     	0x51C   // rw
 #define GPIOLOCK 	0x520U	// rw
-#define GPIOCR 		0x524U	// ro //-- means read only. It only reads back a set of register values once "set"
+#define GPIOCR 	0x524U	// ro //-- means read only. It only reads back a set of register values once "set"
 #define GPIOAMSEL 	0x528U	// rw
 #define GPIOPCTL 	0x52cU	// rw
 #define GPIOADCCTL 	0x530U  // rw
@@ -81,6 +82,7 @@ typedef enum
 
 typedef enum
 {
+    PIN0,
 	PIN1,
 	PIN2,
 	PIN3,
@@ -166,9 +168,9 @@ typedef enum
 // Port, pin, and pin control information needed for AF
 typedef struct  __attribute__((packed))
 {
-        GpioPort_t port;
-        GpioPinChannel_t pin;
-        uint8_t pctl_val;
+	GpioPort_t port;
+	GpioPinChannel_t pin;
+	uint8_t pctl_val;
 }GpioPctl_t;
 
 // GPIO config functions
