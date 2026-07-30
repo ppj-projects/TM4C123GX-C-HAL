@@ -1,3 +1,5 @@
+#include <stdint.h>
+#include <stddef.h>
 #include "gpio1.h"
 
 // This couples sys_ctrl with gpio

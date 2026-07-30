@@ -2,12 +2,13 @@
 #define SYS_CTRL_COMP_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define HWREG32_RW(x) 	(*((uint32_t volatile *)(x)))
 #define HRREG32_RO(x) 	(*((uint32_t volatile const *)(x)))
 
-#define SYSCTR32_RW(x) 	HWREG32_RW((SYSCTR_BASE) + (x))
-#define SYSCTR32_RO(x) 	HWREG32_RO((SYSCTR_BASE) + (x))
+#define SYSCTR32_RW(x) HWREG32_RW((SYSCTR_BASE) + (x))
+#define SYSCTR32_RO(x) HWREG32_RO((SYSCTR_BASE) + (x))
 
 // System Control base address
 #define SYSCTR_BASE		0x400FE000UL
