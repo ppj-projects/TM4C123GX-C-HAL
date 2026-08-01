@@ -174,7 +174,7 @@ typedef struct  __attribute__((packed))
 }GpioPctl_t;
 
 // GPIO config functions
-void Gpio_configure();
+void Gpio_configure(GpioPort_t port);
 
 void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t dir);
 void Gpio_configure_can(GpioCan_t can_periph);
