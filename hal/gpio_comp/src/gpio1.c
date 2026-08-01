@@ -2,8 +2,13 @@
 #include <stddef.h>
 #include "gpio1.h"
 
-// This couples sys_ctrl with gpio
-#include "sys_ctrl1.h"
+// Disconnecting components and creating a contract
+// Comments will explain the order of API calls
+// Users need to determine these from the top level component
+// Ex: Using UART comp will explain calling gpio API, and gpio API
+// will explain calling sys control API
+//// This couples sys_ctrl with gpio
+//#include "sys_ctrl1.h"
 
 // GPIO Port Control (GPIOPCTL) values
 // CAN
@@ -191,6 +196,9 @@ static const GpioPctl_t GPIOPCTL_USB0[] =
 };
 
 
+// Going to remove this function and create a contract
+// User needs to call these APIs themselves, and the comments will explain this
+// This will prevent dependencies between components and decouple them
 // GPIO config functions
 void Gpio_configure(GpioPort_t port)
 {
@@ -199,7 +207,7 @@ void Gpio_configure(GpioPort_t port)
 
 	// Enable port
 	// Check if already enabled. Need getter
-	Sysctrl_configure_gpio_port((Sysctrl_GpioPort_t)port, true);
+	//Sysctrl_configure_gpio_port((Sysctrl_GpioPort_t)port, true);
 
 	return;
 }
