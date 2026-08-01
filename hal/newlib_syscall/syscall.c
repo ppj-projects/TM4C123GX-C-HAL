@@ -17,7 +17,7 @@ void _exit(int code)
 	while(1) ;
 }
 
-int _lskeek(int fd, _off_t pos, int whence)
+int _lseek(int fd, _off_t pos, int whence)
 {
 	// No filesystem implementation
 	return 0;
@@ -46,10 +46,13 @@ int _sbrk(ptrdiff_t incr)
     heap_end = &_end;
   }
   prev_heap_end = heap_end;
-  if (heap_end + incr > stack_ptr) {
-    abort ();
-  }
+  
+  // Not sure where stack_ptr is meant to be defined. 
+  // Commenting out for now. But this is meant to be a guard.
+  //if (heap_end + incr > stack_ptr) {
+  //  abort ();
+  //}
 
   heap_end += incr;
-  return (caddr_t) prev_heap_end;
+  return (int)prev_heap_end;
 }
