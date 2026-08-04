@@ -1,3 +1,4 @@
+/* Followed syntax here: https://home.cs.colorado.edu/~main/cs1300/doc/gnu/ld_3.html */
 /* Map memory regions */
 MEMORY
 {
@@ -64,14 +65,17 @@ SECTIONS
 	/* SRAM sections */
 	.data (NOLOAD):
 	{
-		/* Pointer to start of data*/
-		_data_start = .;
+		/* Pointer to start of data in SRAM*/
+		_data_sram_start = .;
 		
 		KEEP(*(.data))
 		
-		/* Pointer to end of data */
-		_data_end = .;
+		/* Pointer to end of data in SRAM*/
+		_data_sram_end = .;
 	} > SRAM AT > FLASH
+
+	/*  Pointer to .data in FLASH */
+	_data_flash_start = LOADADDR(.data);
 
 	.bss :
 	{
@@ -85,4 +89,10 @@ SECTIONS
 		/* Pointer to end of bss*/
 		_bss_end = .;
 	} > SRAM
+
+	/* Start of heap after SRAM sections. Grows upward */
+	_heap_start = .;
+
+	/* Start of stack at the end of SRAM. Grows downard */
+	_stack_start = ORIGIN(SRAM) + LENGTH(SRAM);
 }
