@@ -30,7 +30,7 @@ SECTIONS
 	.preinit_array :
 	{
 		/* Modern C++ sections */
-		KEEP(*(SORT(.preinit_array.*))
+		KEEP(*(SORT(.preinit_array.*)))
 		KEEP(*(.preinit_array))
 	} > FLASH
 
@@ -44,7 +44,7 @@ SECTIONS
 	.fini_array :
 	{
 		/* Modern C++ sections */
-		KEEP(*(SORT(.fini_array.*))
+		KEEP(*(SORT(.fini_array.*)))
 		KEEP(*(.fini_array))
 	} > FLASH
 
@@ -63,7 +63,7 @@ SECTIONS
 	} > FLASH
 
 	/* SRAM sections */
-	.data (NOLOAD):
+	.data :
 	{
 		/* Pointer to start of data in SRAM*/
 		_data_sram_start = .;
@@ -77,7 +77,7 @@ SECTIONS
 	/*  Pointer to .data in FLASH */
 	_data_flash_start = LOADADDR(.data);
 
-	.bss :
+	.bss (NOLOAD) :
 	{
 		/* Pointer to start of bss*/
 		_bss_start = .;
