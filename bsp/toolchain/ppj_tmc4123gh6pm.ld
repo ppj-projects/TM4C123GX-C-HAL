@@ -14,64 +14,95 @@ SECTIONS
 	/* FLASH sections */
 	.isr_vector : 
 	{
+		/* Memory is naturally aligned every 4 byte addresses on Cortex-m4 */
+		. = ALIGN(4);
 		KEEP(*(.isr_vector))
+		. = ALIGN(4);
 	} > FLASH
 
 	.text :
 	{
+		. = ALIGN(4);
 		*(.text)
 		*(.text.*)
+		. = ALIGN(4);
 	} > FLASH
 
 	.rodata :
 	{
+		. = ALIGN(4);
 		*(.rodata)
 		*(.rodata.*)
+		. = ALIGN(4);
 	} > FLASH
 
 	.preinit_array :
 	{
+		. = ALIGN(4);
+
 		/* Modern C++ sections */
 		KEEP(*(SORT(.preinit_array.*)))
 		KEEP(*(.preinit_array))
+
+		. = ALIGN(4);
 	} > FLASH
 
 	.init_array :
 	{
+		. = ALIGN(4);
+
 		/* Modern C++ sections */
 		KEEP(*(SORT(.init_array.*)))
 		KEEP(*(.init_array))
+
+		. = ALIGN(4);
 	} > FLASH
 
 	.fini_array :
 	{
+		. = ALIGN(4);
+
 		/* Modern C++ sections */
 		KEEP(*(SORT(.fini_array.*)))
 		KEEP(*(.fini_array))
+
+		. = ALIGN(4);
 	} > FLASH
 
 	.ctors :
 	{
+		. = ALIGN(4);
+
 		/* Older C++ sections */
 		KEEP(*(SORT(.ctors.*)))
 		KEEP(*(.ctors))
+
+		. = ALIGN(4);
 	} > FLASH
 
 	.dtors :
 	{
+		. = ALIGN(4);
+
 		/* Older C++ sections */
 		KEEP(*(SORT(.dtors.*))
 		KEEP(*(.dtors))
+
+		. = ALIGN(4);
 	} > FLASH
 
 	/* SRAM sections */
 	.data :
 	{
+		. = ALIGN(4);
+
 		/* Pointer to start of data in SRAM*/
 		_data_sram_start = .;
 		
 		*(.data)
 		*(.data.*)
+
+		. = ALIGN(4);
 		
 		/* Pointer to end of data in SRAM*/
 		_data_sram_end = .;
@@ -82,6 +113,8 @@ SECTIONS
 
 	.bss (NOLOAD) :
 	{
+		. = ALIGN(4);
+
 		/* Pointer to start of bss*/
 		_bss_start = .;
 		*(.bss)
@@ -89,6 +122,8 @@ SECTIONS
 		
 		/* Older section */
 		*(COMMON)
+
+		. = ALIGN(4);
 
 		/* Pointer to end of bss*/
 		_bss_end = .;
