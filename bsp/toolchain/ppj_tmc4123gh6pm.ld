@@ -95,4 +95,10 @@ SECTIONS
 
 	/* Start of stack at the end of SRAM. Grows downard */
 	_stack_start = ORIGIN(SRAM) + LENGTH(SRAM);
+
+	/* Metadata that isn't required */
+	/DISCARD/ :
+	{
+		*(.comment)
+	}
 }
