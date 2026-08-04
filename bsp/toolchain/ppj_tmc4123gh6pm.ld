@@ -19,12 +19,12 @@ SECTIONS
 
 	.text :
 	{
-		KEEP(*(.text))
+		*(.text)
 	} > FLASH
 
 	.rodata :
 	{
-		KEEP(*(.rodata))
+		*(.rodata)
 	} > FLASH
 
 	.preinit_array :
@@ -68,7 +68,7 @@ SECTIONS
 		/* Pointer to start of data in SRAM*/
 		_data_sram_start = .;
 		
-		KEEP(*(.data))
+		*(.data)
 		
 		/* Pointer to end of data in SRAM*/
 		_data_sram_end = .;
@@ -81,10 +81,10 @@ SECTIONS
 	{
 		/* Pointer to start of bss*/
 		_bss_start = .;
-		KEEP(*(.bss))
+		*(.bss)
 		
 		/* Older section */
-		KEEP(*(COMMON))
+		*(COMMON)
 
 		/* Pointer to end of bss*/
 		_bss_end = .;
