@@ -129,9 +129,13 @@ SECTIONS
 		_bss_end = .;
 	} > SRAM
 
+	/* AAPCS says procedure calls must be 8 byte aligned */
+	. = ALIGN(8);
+
 	/* Start of heap after SRAM sections. Grows upward */
 	_heap_start = .;
 
+	. = ALIGN(8);
 	/* Start of stack at the end of SRAM. Grows downard */
 	_stack_start = ORIGIN(SRAM) + LENGTH(SRAM);
 
