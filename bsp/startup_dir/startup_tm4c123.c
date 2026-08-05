@@ -356,13 +356,18 @@ void init_bss()
 }
 
 
-extern uint32_t* _data_start;
-extern uint32_t* _data_end;
+extern uint32_t* _data_sram_start;
+extern uint32_t* _data_sram_end;
+extern uint32_t* _data_flash_start;
 
-// data gets placed after ctors in the linker script. 
 void init_static_data()
 {
-	
+	uint32_t* data_sram_entry = &_data_sram_start;
+	uint32_t* data_flash_entry = &_data_flash_start;
+	while( data_sram_entry < &_data_sram_end)
+	{
+		*data_sram_entry++ = *data_flash_entry++;
+	}
 }
 
 
