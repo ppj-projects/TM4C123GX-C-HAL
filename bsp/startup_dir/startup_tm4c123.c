@@ -207,16 +207,16 @@ void I2c3_ISR()
 }
 
 
-// CMSIS
+// CMSIS style
 typedef void (*Isr_t)(void);
 
 __attribute__((section(".isr_vectors")));
 const volatile Isr_t vector_table[155] =
 {
-	// stack pointer defined in linker script. At top of SRAM
+	// Stack pointer defined in linker script. At top of SRAM
 	(isr_t)&_stack_start,
 
-	/* system exceptions */
+	/* System exceptions */
 	Reset_ISR, 		// RESET
 	Nmi_ISR,		// NON-MASKABLE INTERRUPT NMI
 	Hardfault_ISR,		// HARD FAULT
@@ -230,7 +230,7 @@ const volatile Isr_t vector_table[155] =
 	Pendsv_ISR, 		// PENDSV
 	Systick_ISR, 		// SYSTICK
 
-	/* interrupts */
+	/* Interrupts */
 	GpioA_ISR, 		// GPIOA
 	GpioB_ISR, 		// GPIOB
 	GpioC_ISR, 		// GPIOC
@@ -320,15 +320,15 @@ const volatile Isr_t vector_table[155] =
 	Unused_ISR, 		// PWM1 GENERATOR 1
 	Unused_ISR, 		// PWM1 GENERATOR 2
 	Unused_ISR, 		// PWM1 GENERATOR 3
-	Unused_ISR 		 // PWM1 FAULT
-}
+	Unused_ISR 		// PWM1 FAULT
+};
 
 
-
-// CPU initialization
-// zero clear RAM initialization
-// ROM to RAM initialization
-// Static constructor initialization
+// Placing forward declarations for these
+void init_bss();
+void init_static_data();
+void init_init_array();
+void init_ctors();
 
 void startup()
 {
@@ -351,6 +351,8 @@ void startup()
 }
 
 
+// 32 bit memory access guaranteed to be safe by AAPCS's 4 byte address alignment
+// in linker script
 extern uint32_t _bss_start;
 extern uint32_t _bss_end;
 
