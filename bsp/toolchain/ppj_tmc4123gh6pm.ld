@@ -40,9 +40,13 @@ SECTIONS
 	{
 		. = ALIGN(4);
 
+		_preinit_start = .;
+
 		/* Modern C++ sections */
 		KEEP(*(SORT(.preinit_array.*)))
 		KEEP(*(.preinit_array))
+
+		_preinit_end = .;
 
 		. = ALIGN(4);
 	} > FLASH
@@ -51,9 +55,13 @@ SECTIONS
 	{
 		. = ALIGN(4);
 
+		_init_array_start = .;
+
 		/* Modern C++ sections */
 		KEEP(*(SORT(.init_array.*)))
 		KEEP(*(.init_array))
+
+		_init_array_end = .;
 
 		. = ALIGN(4);
 	} > FLASH
@@ -62,9 +70,13 @@ SECTIONS
 	{
 		. = ALIGN(4);
 
+		_fini_array_start = .;
+
 		/* Modern C++ sections */
 		KEEP(*(SORT(.fini_array.*)))
 		KEEP(*(.fini_array))
+
+		_fini_array_end = .;
 
 		. = ALIGN(4);
 	} > FLASH
@@ -73,9 +85,13 @@ SECTIONS
 	{
 		. = ALIGN(4);
 
+		_ctors_start = .;
+
 		/* Older C++ sections */
 		KEEP(*(SORT(.ctors.*)))
 		KEEP(*(.ctors))
+
+		_ctors_end = .;
 
 		. = ALIGN(4);
 	} > FLASH
@@ -84,9 +100,13 @@ SECTIONS
 	{
 		. = ALIGN(4);
 
+		_dtors_start = .;
+
 		/* Older C++ sections */
 		KEEP(*(SORT(.dtors.*))
 		KEEP(*(.dtors))
+
+		_dtors_end = .;
 
 		. = ALIGN(4);
 	} > FLASH
