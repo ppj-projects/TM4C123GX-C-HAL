@@ -351,8 +351,8 @@ void startup()
 }
 
 
-extern uint32_t* _bss_start;
-extern uint32_t* _bss_end;
+extern uint32_t _bss_start;
+extern uint32_t _bss_end;
 
 void init_bss()
 {
@@ -364,9 +364,9 @@ void init_bss()
 }
 
 
-extern uint32_t* _data_sram_start;
-extern uint32_t* _data_sram_end;
-extern uint32_t* _data_flash_start;
+extern uint32_t _data_sram_start;
+extern uint32_t _data_sram_end;
+extern uint32_t _data_flash_start;
 
 void init_static_data()
 {
