@@ -183,4 +183,9 @@ void Gpio_configure_i2c(GpioI2c_t i2c_periph);
 void Gpio_configure_ssi(GpioSsi_t ssi_periph);
 void Gpio_configure_timer(GpioTimer_t timer_periph);
 
+// Application layer ISR callback registration
+typedef void* Gpiocb_data;
+typedef void (*Gpiocb_t)(void*);
+void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_t callback, Gpiocb_data data);
+
 #endif
