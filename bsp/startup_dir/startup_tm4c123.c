@@ -4,34 +4,37 @@
 extern uint32_t* _stack_start;
 extern uint32_t* _heap_start;
 
-// I guess these are only needed by older compilers
-// __attribute__((interrupt));
+__attribute__((weak))
 void Unused_ISR()
 {
 	while(1);
 	return;
 }
 
+__attribute((weak))
 void Reset_ISR()
 {
 	startup();
 	return; 
 }
 
-void Nmi_ISR
+__attribute((weak))
+void Nmi_ISR()
 {
 	// This should not happen
 	while(1) ;
 	return; 
 }
 
-void Hardfault_ISR
+__attribute__((weak))
+void Hardfault_ISR()
 {
 	// This should not happen
 	while(1) ;
 	return; 
 }
 
+__attribute__((weak))
 void MemMan_ISR()
 {
 	// This should not happen
@@ -39,6 +42,7 @@ void MemMan_ISR()
 	return; 
 }
 
+__attribute__((weak))
 void Busfault_ISR()
 {
 	// This should not happen
@@ -46,6 +50,7 @@ void Busfault_ISR()
 	return; 
 }
 
+__attribute__((weak))
 void Usagefault_ISR()
 {
 	// This should not happen
@@ -53,6 +58,7 @@ void Usagefault_ISR()
 	return; 
 }
 
+__attribute__((weak))
 void Svc_ISR()
 {
 	// Not using SVC for this implementation
@@ -60,6 +66,7 @@ void Svc_ISR()
 	return; 
 }
 
+__attribute__((weak))
 void Debugmon_ISR()
 {
 	// Not using SVC for this implementation
@@ -67,6 +74,7 @@ void Debugmon_ISR()
 	return; 
 }
 
+__attribute__((weak))
 void Pendsv_ISR()
 {
 	// Not using SVC for this implementation
@@ -74,6 +82,7 @@ void Pendsv_ISR()
 	return; 
 }
 
+__attribute__((weak))
 void Systick_ISR()
 {
 	// To be implemented later
@@ -81,126 +90,145 @@ void Systick_ISR()
 }
 
 
+__attribute__((weak))
 void GpioA_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void GpioB_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void GpioC_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void GpioD_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void GpioE_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void GpioF_ISR()
 {
 	return; 
 }
 
-
+__attribute__((weak))
 void Uart0_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart1_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart2_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart3_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart4_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart5_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart6_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Uart7_ISR()
 {
 	return; 
 }
 
-
+__attribute__((weak))
 void Ssi0_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Ssi1_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Ssi2_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Ssi3_ISR()
 {
 	return; 
 }
 
-
+__attribute__((weak))
 void Can0_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void Can1_ISR()
 {
 	return; 
 }
 
-
-
+__attribute__((weak))
 void I2c0_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void I2c1_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void I2c2_ISR()
 {
 	return; 
 }
 
+__attribute__((weak))
 void I2c3_ISR()
 {
 	return; 
