@@ -1,3 +1,10 @@
+#include "isr.h"
+#include "can_isr.h"
+#include "i2c_isr.h"
+#include "gpio_isr.h"
+#include "ssi_isr.h"
+#include "uart_isr.h"
+
 __attribute__((weak))
 void Unused_ISR()
 {
