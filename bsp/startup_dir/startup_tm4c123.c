@@ -8,56 +8,75 @@ extern uint32_t* _heap_start;
 // __attribute__((interrupt));
 void Unused_ISR()
 {
+	while(1);
 	return;
 }
 
 void Reset_ISR()
 {
+	startup();
 	return; 
 }
 
 void Nmi_ISR
 {
+	// This should not happen
+	while(1) ;
 	return; 
 }
 
 void Hardfault_ISR
 {
+	// This should not happen
+	while(1) ;
 	return; 
 }
 
 void MemMan_ISR()
 {
+	// This should not happen
+	while(1) ;
 	return; 
 }
 
 void Busfault_ISR()
 {
+	// This should not happen
+	while(1) ;
 	return; 
 }
 
 void Usagefault_ISR()
 {
+	// This should not happen
+	while(1) ;
 	return; 
 }
 
 void Svc_ISR()
 {
+	// Not using SVC for this implementation
+	while(1) ;
 	return; 
 }
 
 void Debugmon_ISR()
 {
+	// Not using SVC for this implementation
+	while(1) ;
 	return; 
 }
 
 void Pendsv_ISR()
 {
+	// Not using SVC for this implementation
+	while(1) ;
 	return; 
 }
 
 void Systick_ISR()
 {
+	// To be implemented later
 	return; 
 }
 
@@ -322,3 +341,34 @@ void startup()
 	// Start main
 	main();
 }
+
+
+extern uint32_t* _bss_start;
+extern uint32_t* _bss_end;
+
+void init_bss()
+{
+	// Zero-ize the bss section
+	for(uint32_t* bss_entry = &_bss_start; bss_entry < &_bss_end; bss_entry++)
+	{
+		*bss_entry = 0;
+	}
+}
+
+
+extern uint32_t* _data_start;
+extern uint32_t* _data_end;
+
+// data gets placed after ctors in the linker script. 
+void init_static_data()
+{
+	
+}
+
+
+// Need pointers to ctors and init_array
+void init_static_ctors()
+{
+
+}
+
