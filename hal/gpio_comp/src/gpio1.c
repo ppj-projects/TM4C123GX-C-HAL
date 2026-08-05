@@ -3,6 +3,49 @@
 #include "gpio1.h"
 #include "gpio_isr.h"
 
+// Gpio ISRs
+void Gpio_signal_handler(GpioPort_t port, GpioPinChannel_t pin)
+{
+	return;
+}
+
+void GpioA_ISR()
+{
+	//Gpio_signal_handler();
+	return; 
+}
+
+void GpioB_ISR()
+{
+	//Gpio_signal_handler();
+	return; 
+}
+
+void GpioC_ISR()
+{
+	//Gpio_signal_handler();
+	return; 
+}
+
+void GpioD_ISR()
+{
+	//Gpio_signal_handler();
+	return; 
+}
+
+void GpioE_ISR()
+{
+	//Gpio_signal_handler();
+	return; 
+}
+
+void GpioF_ISR()
+{
+	//Gpio_signal_handler();
+	return; 
+}
+
+
 // Disconnecting components and creating a contract
 // Comments will explain the order of API calls
 // Users need to determine these from the top level component
