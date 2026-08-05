@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "gpio1.h"
+#include "gpio_isr.h"
 
 // Disconnecting components and creating a contract
 // Comments will explain the order of API calls
