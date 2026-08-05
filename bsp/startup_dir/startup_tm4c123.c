@@ -336,15 +336,15 @@ void startup()
 	cpu_clock_init()
 
 	// Initialize non-initialized variables
-	init_bss()
+	init_bss();
 
 	// Initialize statics and globals
-	init_static_data()
+	init_static_data();
 
-	// Initialize constructor... but this is C?
-	init_preinit_array()
-	init_init_array()
-	init_ctors()
+	// Initialize constructor
+	init_preinit_array();
+	init_init_array();
+	init_ctors();
 
 	// Start main
 	main();
@@ -382,10 +382,12 @@ typedef void (*Preinit_array_t)(void);
 extern Preinit_array_t _preinit_start;
 extern Preinit_array_t _preinit_end;
 
-// Need pointers to ctors and init_array
 void init_preinit_array()
 {
-
+	for(Preinit_array_t* preinit_entry = &_preinit_start ; preinit_entry < &_preinit_end; preinit_entry++)
+	{
+		(*preinit_entry)();
+	}
 }
 
 typedef void (*Init_array_t)(void);
@@ -394,7 +396,10 @@ extern Init_array_t _init_array_end;
 
 void init_init_array()
 {
-
+	for(Init_array_t* init_array_entry = &_init_array_start; init_array_entry < &_init_array_end; init_array_entry++)
+	{
+		(*init_array_entry)();
+	}
 }
 
 typedef void (*Ctors_t)(void);
@@ -403,8 +408,10 @@ extern Ctors_t _ctors_end;
 
 void init_ctors()
 {
-
+	for(Ctors_t* ctor_entry = &_ctors_start; ctor_entry < &_ctors_end; ctor_entry++)
+	{
+		(*ctor_entry)();
+	}
 }
 
-}
 
