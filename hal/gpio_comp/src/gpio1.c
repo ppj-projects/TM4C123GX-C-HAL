@@ -177,7 +177,7 @@ static const GpioPctl_t GPIOPCTL_I2C3[] =
 
 static const GpioPctl_t * GPIOPCTL_I2C_PERIPHERAL_PINS[4] = 
 {
-    GPIOPCTL_I2C0, GPIOPCTL_I2C1, GPIOPCTL_I2C3, GPIOPCTL_I2C3
+	GPIOPCTL_I2C0, GPIOPCTL_I2C1, GPIOPCTL_I2C3, GPIOPCTL_I2C3
 };
 
 // SSI
@@ -220,7 +220,7 @@ static const GpioPctl_t GPIOPCTL_SSI3[] =
 
 static const GpioPctl_t * GPIOPCTL_SSI_PERIPHERAL_PINS[4] = 
 {
-    GPIOPCTL_SSI0, GPIOPCTL_SSI1, GPIOPCTL_SSI2, GPIOPCTL_SSI3
+	GPIOPCTL_SSI0, GPIOPCTL_SSI1, GPIOPCTL_SSI2, GPIOPCTL_SSI3
 };
 
 // USB
@@ -263,88 +263,18 @@ void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t di
 	uint32_t drive_val = 1 << pin;
 	uint32_t den_val = 1 << pin;
 	Gpio_configure(port);
-
-	switch(port)
-	{
-	case GPIOA:
-		GPIOA_RW_REG(GPIODIR) &= ~(1 << pin);
-		GPIOA_RW_REG(GPIODIR) |= dir_val;
-		
-		GPIOA_RW_REG(GPIOAFSEL) &= ~(1 << pin)
-		GPIOA_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOA_RW_REG(GPIODR4R) &= ~(1 << pin);
-		GPIOA_RW_REG(GPIODR4R) |= drive_val;
-		
-		GPIOA_RW_REG(GPIODEN) &= ~(1 << pin);
-		GPIOA_RW_REG(GPIODEN) |= den_val;
-		break;
-	case GPIOB:
-		GPIOB_RW_REG(GPIODIR) &= ~(1 << pin);
-		GPIOB_RW_REG(GPIODIR) |= dir_val;
-		
-		GPIOB_RW_REG(GPIOAFSEL) &= ~(1 << pin);
-		GPIOB_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOB_RW_REG(GPIODR4R) &= ~(1 << pin);
-		GPIOB_RW_REG(GPIODR4R) |= drive_val;
-		
-		GPIOB_RW_REG(GPIODEN) |= den_val;
-                GPIOB_RW_REG(GPIODEN) |= den_val;
-                break;
-	case GPIOC:
-		GPIOC_RW_REG(GPIODIR) &= ~(1 << pin);
-		GPIOC_RW_REG(GPIODIR) |= dir_val;
-		
-		GPIOC_RW_REG(GPIOAFSEL) &= ~(1 << pin);
-		GPIOC_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOC_RW_REG(GPIODR4R) &= ~(1 << pin);
-		GPIOC_RW_REG(GPIODR4R) |= drive_val;
-		
-		GPIOC_RW_REG(GPIODEN) &= ~(1 << pin);
-		GPIOC_RW_REG(GPIODEN) |= den_val;
-		break;
-	case GPIOD:
-		GPIOD_RW_REG(GPIODIR) &= ~(1 << pin)
-		GPIOD_RW_REG(GPIODIR) |= dir_val;
-		
-		GPIOD_RW_REG(GPIOAFSEL) &= ~(1 << pin);
-		GPIOD_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOD_RW_REG(GPIODR4R) &= ~(1 << pin);
-		GPIOD_RW_REG(GPIODR4R) |= drive_val;
-		
-		GPIOD_RW_REG(GPIODEN) &= ~(1 << pin);
-		GPIOD_RW_REG(GPIODEN) |= den_val;
-		break;
-	case GPIOE:
-		GPIOE_RW_REG(GPIODIR) &= ~(1 << pin);
-		GPIOE_RW_REG(GPIODIR) |= dir_val;
-		
-		GPIOE_RW_REG(GPIOAFSEL) &= ~(1 << pin);
-		GPIOE_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOE_RW_REG(GPIODR4R) &= ~(1 << pin);
-		GPIOE_RW_REG(GPIODR4R) |= drive_val;
-		
-		GPIOE_RW_REG(GPIODEN) &= ~(1 << pin);
-		GPIOE_RW_REG(GPIODEN) |= den_val;
-		break;
-	case GPIOF:
-		GPIOF_RW_REG(GPIODIR) &= ~(1 << pin);
-		GPIOF_RW_REG(GPIODIR) |= dir_val;
-		
-		GPIOF_RW_REG(GPIOAFSEL) &= ~(1 << pin);
-		GPIOF_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOF_RW_REG(GPIODR4R) &= ~(1 << pin);
-		GPIOF_RW_REG(GPIODR4R) |= drive_val;
-		
-		GPIOF_RW_REG(GPIODEN) &= ~(1 << pin);
-		GPIOF_RW_REG(GPIODEN) |= den_val;
-		break;
-	}
+	
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODIR) &= ~(1 << pin);
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODIR) |= dir_val;
+	
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIOAFSEL) &= ~(1 << pin);
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIOAFSEL) |= afsel_val
+	
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODR4R) &= ~(1 << pin);
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODR4R) |= drive_val;
+	
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODEN) &= ~(1 << pin);
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODEN) |= den_val;
 
 	return;
 }

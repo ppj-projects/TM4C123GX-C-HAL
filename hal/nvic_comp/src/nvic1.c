@@ -3,7 +3,11 @@
 
 void Nvic_enable_interrupt(Nvic_interrupt_numb_t int_num, Nvic_priority_t priority, bool en)
 {
+	// NVIC registers are a concatenation of 32-bit fields for each interrupt
+	// Divide by 32 to get proper reg offset
 	uint32_t reg_offset = int_num >> 5;
+	
+	// Find mod 32 to find correct bit offset
 	uint32_t bit_offset = int_num & 0x1F;
 
 	uint32_t pri_reg_offset = int_num >> 2;
