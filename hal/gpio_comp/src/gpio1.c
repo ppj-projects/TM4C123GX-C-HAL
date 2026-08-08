@@ -267,41 +267,83 @@ void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t di
 	switch(port)
 	{
 	case GPIOA:
-		GPIOA_RW_REG(GPIODIR) = dir_val;
-		GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOA_RW_REG(GPIODR4R) = drive_val;
-		GPIOA_RW_REG(GPIODEN) = den_val;
+		GPIOA_RW_REG(GPIODIR) &= ~(1 << pin);
+		GPIOA_RW_REG(GPIODIR) |= dir_val;
+		
+		GPIOA_RW_REG(GPIOAFSEL) &= ~(1 << pin)
+		GPIOA_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOA_RW_REG(GPIODR4R) &= ~(1 << pin);
+		GPIOA_RW_REG(GPIODR4R) |= drive_val;
+		
+		GPIOA_RW_REG(GPIODEN) &= ~(1 << pin);
+		GPIOA_RW_REG(GPIODEN) |= den_val;
 		break;
 	case GPIOB:
-		GPIOB_RW_REG(GPIODIR) = dir_val;
-		GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOB_RW_REG(GPIODR4R) = drive_val;
-                GPIOB_RW_REG(GPIODEN) = den_val;
+		GPIOB_RW_REG(GPIODIR) &= ~(1 << pin);
+		GPIOB_RW_REG(GPIODIR) |= dir_val;
+		
+		GPIOB_RW_REG(GPIOAFSEL) &= ~(1 << pin);
+		GPIOB_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOB_RW_REG(GPIODR4R) &= ~(1 << pin);
+		GPIOB_RW_REG(GPIODR4R) |= drive_val;
+		
+		GPIOB_RW_REG(GPIODEN) |= den_val;
+                GPIOB_RW_REG(GPIODEN) |= den_val;
                 break;
 	case GPIOC:
-		GPIOC_RW_REG(GPIODIR) = dir_val;
-		GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOC_RW_REG(GPIODR4R) = drive_val;
-                GPIOC_RW_REG(GPIODEN) = den_val;
-                break;
+		GPIOC_RW_REG(GPIODIR) &= ~(1 << pin);
+		GPIOC_RW_REG(GPIODIR) |= dir_val;
+		
+		GPIOC_RW_REG(GPIOAFSEL) &= ~(1 << pin);
+		GPIOC_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOC_RW_REG(GPIODR4R) &= ~(1 << pin);
+		GPIOC_RW_REG(GPIODR4R) |= drive_val;
+		
+		GPIOC_RW_REG(GPIODEN) &= ~(1 << pin);
+		GPIOC_RW_REG(GPIODEN) |= den_val;
+		break;
 	case GPIOD:
-		GPIOD_RW_REG(GPIODIR) = dir_val;
-		GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOD_RW_REG(GPIODR4R) = drive_val;
-                GPIOD_RW_REG(GPIODEN) = den_val;
-                break;
+		GPIOD_RW_REG(GPIODIR) &= ~(1 << pin)
+		GPIOD_RW_REG(GPIODIR) |= dir_val;
+		
+		GPIOD_RW_REG(GPIOAFSEL) &= ~(1 << pin);
+		GPIOD_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOD_RW_REG(GPIODR4R) &= ~(1 << pin);
+		GPIOD_RW_REG(GPIODR4R) |= drive_val;
+		
+		GPIOD_RW_REG(GPIODEN) &= ~(1 << pin);
+		GPIOD_RW_REG(GPIODEN) |= den_val;
+		break;
 	case GPIOE:
-		GPIOE_RW_REG(GPIODIR) = dir_val;
-		GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOE_RW_REG(GPIODR4R) = drive_val;
-                GPIOE_RW_REG(GPIODEN) = den_val;
-                break;
+		GPIOE_RW_REG(GPIODIR) &= ~(1 << pin);
+		GPIOE_RW_REG(GPIODIR) |= dir_val;
+		
+		GPIOE_RW_REG(GPIOAFSEL) &= ~(1 << pin);
+		GPIOE_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOE_RW_REG(GPIODR4R) &= ~(1 << pin);
+		GPIOE_RW_REG(GPIODR4R) |= drive_val;
+		
+		GPIOE_RW_REG(GPIODEN) &= ~(1 << pin);
+		GPIOE_RW_REG(GPIODEN) |= den_val;
+		break;
 	case GPIOF:
-		GPIOF_RW_REG(GPIODIR) = dir_val;
-		GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
-		GPIOF_RW_REG(GPIODR4R) = drive_val;
-                GPIOF_RW_REG(GPIODEN) = den_val;
-                break;
+		GPIOF_RW_REG(GPIODIR) &= ~(1 << pin);
+		GPIOF_RW_REG(GPIODIR) |= dir_val;
+		
+		GPIOF_RW_REG(GPIOAFSEL) &= ~(1 << pin);
+		GPIOF_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOF_RW_REG(GPIODR4R) &= ~(1 << pin);
+		GPIOF_RW_REG(GPIODR4R) |= drive_val;
+		
+		GPIOF_RW_REG(GPIODEN) &= ~(1 << pin);
+		GPIOF_RW_REG(GPIODEN) |= den_val;
+		break;
 	}
 
 	return;
@@ -310,40 +352,58 @@ void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t di
 
 static void Gpio_configure_af_peripheral(const GpioPctl_t periph_setting)
 {
-    uint32_t afsel_val = 1 << periph_setting.pin;
-    uint32_t pctl_val = periph_setting.pctl_val << (4 * periph_setting.pin);
-    Gpio_configure(periph_setting.port);
+	uint32_t afsel_val = 1 << periph_setting.pin;
+	uint32_t pctl_val = periph_setting.pctl_val << (4 * periph_setting.pin);
+	Gpio_configure(periph_setting.port);
 
-    switch(periph_setting.port)
-    {
-    case GPIOA:
-            GPIOA_RW_REG(GPIOAFSEL) = afsel_val;
-            GPIOA_RW_REG(GPIOPCTL) = pctl_val;
-            break;
-    case GPIOB:
-            GPIOB_RW_REG(GPIOAFSEL) = afsel_val;
-            GPIOB_RW_REG(GPIOPCTL) = pctl_val;
-            break;
-    case GPIOC:
-            GPIOC_RW_REG(GPIOAFSEL) = afsel_val;
-            GPIOC_RW_REG(GPIOPCTL) = pctl_val;
-            break;
-    case GPIOD:
-            GPIOD_RW_REG(GPIOAFSEL) = afsel_val;
-            GPIOD_RW_REG(GPIOPCTL) = pctl_val;
-            break;
-    case GPIOE:
-            GPIOE_RW_REG(GPIOAFSEL) = afsel_val;
-            GPIOE_RW_REG(GPIOPCTL) = pctl_val;
-            break;
-    case GPIOF:
-            GPIOF_RW_REG(GPIOAFSEL) = afsel_val;
-            GPIOF_RW_REG(GPIOPCTL) = pctl_val;
-            break;
-    }
+	switch(periph_setting.port)
+	{
+	case GPIOA:
+    		GPIOA_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
+		GPIOA_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOA_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
+		GPIOA_RW_REG(GPIOPCTL) |= pctl_val;
+		break;
+	case GPIOB:
+		GPIOB_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
+		GPIOB_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOB_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
+		GPIOB_RW_REG(GPIOPCTL) |= pctl_val;
+		break;
+	case GPIOC:
+		GPIOC_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
+		GPIOC_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOC_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
+		GPIOC_RW_REG(GPIOPCTL) |= pctl_val;
+		break;
+	case GPIOD:
+		GPIOD_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
+		GPIOD_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOD_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
+		GPIOD_RW_REG(GPIOPCTL) |= pctl_val;
+		break;
+	case GPIOE:
+		GPIOE_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
+		GPIOE_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOE_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
+		GPIOE_RW_REG(GPIOPCTL) |= pctl_val;
+		break;
+	case GPIOF:
+		GPIOF_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
+		GPIOF_RW_REG(GPIOAFSEL) |= afsel_val;
+		
+		GPIOF_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
+		GPIOF_RW_REG(GPIOPCTL) |= pctl_val;
+		break;
+	}
 
 
-    return;
+	return;
 }
 
 void Gpio_configure_can(GpioCan_t can_periph)
