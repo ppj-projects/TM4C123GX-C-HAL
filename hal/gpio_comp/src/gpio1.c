@@ -285,53 +285,17 @@ static void Gpio_configure_af_peripheral(const GpioPctl_t periph_setting)
 	uint32_t afsel_val = 1 << periph_setting.pin;
 	uint32_t pctl_val = periph_setting.pctl_val << (4 * periph_setting.pin);
 	Gpio_configure(periph_setting.port);
-
-	switch(periph_setting.port)
-	{
-	case GPIOA:
-    		GPIOA_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
-		GPIOA_RW_REG(GPIOAFSEL) |= afsel_val;
+	
+	
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOAFSEL) &=
+		~(1 << periph_setting.pin);
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOAFSEL) |=
+		afsel_val;
 		
-		GPIOA_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
-		GPIOA_RW_REG(GPIOPCTL) |= pctl_val;
-		break;
-	case GPIOB:
-		GPIOB_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
-		GPIOB_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOB_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
-		GPIOB_RW_REG(GPIOPCTL) |= pctl_val;
-		break;
-	case GPIOC:
-		GPIOC_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
-		GPIOC_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOC_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
-		GPIOC_RW_REG(GPIOPCTL) |= pctl_val;
-		break;
-	case GPIOD:
-		GPIOD_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
-		GPIOD_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOD_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
-		GPIOD_RW_REG(GPIOPCTL) |= pctl_val;
-		break;
-	case GPIOE:
-		GPIOE_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
-		GPIOE_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOE_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
-		GPIOE_RW_REG(GPIOPCTL) |= pctl_val;
-		break;
-	case GPIOF:
-		GPIOF_RW_REG(GPIOAFSEL) &= ~(1 << periph_setting.pin);
-		GPIOF_RW_REG(GPIOAFSEL) |= afsel_val;
-		
-		GPIOF_RW_REG(GPIOPCTL) &= ~(1 << periph_setting.pin);
-		GPIOF_RW_REG(GPIOPCTL) |= pctl_val;
-		break;
-	}
-
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOPCTL) &=
+		~(1 << periph_setting.pin);
+	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOPCTL) |= 
+		pctl_val;
 
 	return;
 }

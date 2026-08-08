@@ -16,30 +16,31 @@
 #define GPIOF_BASE		(GPIOB_BASE + GPIO_BASE_OFFSET)
 
 // GPIO register offsets
-#define GPIODATA	0x000U  // rw
-#define GPIODIR	0x400U 	// rw
-#define GPIOIS 	0x404U 	// rw
-#define GPIOIBE 	0x408U 	// rw
-#define GPIOIEV 	0x40cU	// rw
-#define GPIOIM 	0x410U 	// rw
-#define GPIORIS 	0x414U	// ro
-#define GPIOMIS 	0x418U	// ro
-#define GPIOICR 	0x41cU	// rw
-#define GPIOAFSEL 	0x420U 	// rw
-#define GPIODR2R 	0x500U	// rw
-#define GPIODR4R 	0x504U	// rw
-#define GPIODR8R 	0x508U	// rw
-#define GPIOODR 	0x50cU	// rw
-#define GPIOPUR 	0x510U	// rw
-#define GPIOPDR 	0x514U	// rw
-#define GPIOSLR 	0x518U	// rw
-#define GPIODEN     	0x51C   // rw
-#define GPIOLOCK 	0x520U	// rw
-#define GPIOCR 	0x524U	// ro //-- means read only. It only reads back a set of register values once "set"
-#define GPIOAMSEL 	0x528U	// rw
-#define GPIOPCTL 	0x52cU	// rw
-#define GPIOADCCTL 	0x530U  // rw
-#define GPIODMACTL 	0x534U  // rw
+// Not continguous, so no offsets like above
+#define GPIODATA	0x000U  // RW
+#define GPIODIR	0x400U  // RW
+#define GPIOIS 	0x404U  // RW
+#define GPIOIBE 	0x408U  // RW
+#define GPIOIEV 	0x40cU	// RW
+#define GPIOIM 	0x410U  // RW
+#define GPIORIS 	0x414U	// RO
+#define GPIOMIS 	0x418U	// RO
+#define GPIOICR 	0x41cU	// RW
+#define GPIOAFSEL 	0x420U  // RW
+#define GPIODR2R 	0x500U	// RW
+#define GPIODR4R 	0x504U	// RW
+#define GPIODR8R 	0x508U	// RW
+#define GPIOODR 	0x50cU	// RW
+#define GPIOPUR 	0x510U	// RW
+#define GPIOPDR 	0x514U	// RW
+#define GPIOSLR 	0x518U	// RW
+#define GPIODEN     	0x51CU  // RW
+#define GPIOLOCK 	0x520U	// RW
+#define GPIOCR 	0x524U	// RO //-- means read only. It only reads back a set of register values once "set"
+#define GPIOAMSEL 	0x528U	// RW
+#define GPIOPCTL 	0x52cU	// RW
+#define GPIOADCCTL 	0x530U  // RW
+#define GPIODMACTL 	0x534U  // RW
 
 // GPIO access
 #define GPIOA_RW_REG(x) HWREG32_RW((GPIOA_BASE) + (x))
