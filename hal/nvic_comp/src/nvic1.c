@@ -52,6 +52,10 @@ bool Nvic_is_interrupt_active(int_num)
 {
 	uint32_t reg_offset = int_num >> 5;
 	uint32_t bit_offset = int_num & 0x1F;
+	uint32_t active_val = (NVIC32_RO(ACTIVE0 + reg_offset) >> bit_offset);
+	
+	// Use a mask, get the active bit
+	active_val &= 1;
 
-	return ((NVIC32_RO(ACTIVE0 + reg_offset) >> bit_offset) == 1 ? true : false);
+	return (active_val == 1 ? true : false);
 }
