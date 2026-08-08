@@ -302,47 +302,47 @@ static void Gpio_configure_af_peripheral(const GpioPctl_t periph_setting)
 
 void Gpio_configure_can(GpioCan_t can_periph)
 {
-    const GpioPctl_t * periph_array = GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph];
-    for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
-    {
-	    Gpio_configure_af_peripheral(*(periph_array + periph_entry));
-    }
+	const GpioPctl_t * periph_array = GPIOPCTL_CAN_PERIPHERAL_PINS[can_periph];
+	for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
+	{
+		Gpio_configure_af_peripheral(*(periph_array + periph_entry));
+	}
 	return;
 }
 
 void Gpio_configure_uart(GpioUart_t uart_periph)
 {
-    const GpioPctl_t * periph_array = GPIOPCTL_UART_PERIPHERAL_PINS[uart_periph];
-    for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
-    {
-	    Gpio_configure_af_peripheral(*(periph_array + periph_entry));
-    }
+	const GpioPctl_t * periph_array = GPIOPCTL_UART_PERIPHERAL_PINS[uart_periph];
+	for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
+	{
+		Gpio_configure_af_peripheral(*(periph_array + periph_entry));
+	}
 	return;
 }
 
 void Gpio_configure_i2c(GpioI2c_t i2c_periph)
 {
-    const GpioPctl_t * periph_array = GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph];
-    for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
-    {
-	    Gpio_configure_af_peripheral(*(periph_array + periph_entry));
-    }
+	const GpioPctl_t * periph_array = GPIOPCTL_I2C_PERIPHERAL_PINS[i2c_periph];
+	for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
+	{
+		Gpio_configure_af_peripheral(*(periph_array + periph_entry));
+	}
 	return;
 }
 
 void Gpio_configure_ssi(GpioSsi_t ssi_periph)
 {
-    const GpioPctl_t * periph_array = GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph];
-    for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
-    {
-	    Gpio_configure_af_peripheral(*(periph_array + periph_entry));
-    }
+	const GpioPctl_t * periph_array = GPIOPCTL_SSI_PERIPHERAL_PINS[ssi_periph];
+	for(size_t periph_entry = 0; periph_entry < sizeof(periph_array); periph_entry++)
+	{
+		Gpio_configure_af_peripheral(*(periph_array + periph_entry));
+	}
 	return;
 }
 
 void Gpio_configure_timer(GpioTimer_t timer_periph)
 {
-    Gpio_configure_af_peripheral(GPIOPCTL_USB0[timer_periph]);
+	Gpio_configure_af_peripheral(GPIOPCTL_USB0[timer_periph]);
 	return;
 }
 
