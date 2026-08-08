@@ -258,7 +258,7 @@ void Gpio_configure(GpioPort_t port)
 
 void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t dir)
 {
-	uint32_t dir_val = ((dir == INPUT)? 1 : 0 ) << pin;
+	uint32_t dir_val = ((dir == INPUT) ? 0 : 1 ) << pin;
 	uint32_t afsel_val = 0 << pin;
 	uint32_t drive_val = 1 << pin;
 	uint32_t den_val = 1 << pin;
