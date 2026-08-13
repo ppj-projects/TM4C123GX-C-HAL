@@ -189,6 +189,9 @@ void Gpio_configure_i2c(GpioI2c_t i2c_periph);
 void Gpio_configure_ssi(GpioSsi_t ssi_periph);
 void Gpio_configure_timer(GpioTimer_t timer_periph);
 
+// GPIO interrupt config functions
+
+
 // Application layer ISR callback registration
 typedef void* Gpiocb_data;
 typedef void (*Gpiocb_t)(void*);

@@ -4,8 +4,39 @@
 #include "gpio_isr.h"
 
 // Gpio ISRs
-void Gpio_signal_handler(GpioPort_t port, GpioPinChannel_t pin)
+// Call the correct port and pin callback
+void Gpio_ISR_callback()
 {
+	switch(gpio_pin)
+	{
+	case pin0:
+	case pin1:
+	case pin2:
+	case pin3:
+	case pin4:
+	case pin5:
+	case pin6:
+	}
+}
+
+void Gpio_signal_handler(GpioPort_t port)
+{
+	const uint32_t num_of_pins = 7;
+	const uint32_t gpio_port = (GPIOA_BASE + (GPIO_BASE_OFFSET * port));
+	uint32_t gpio_pin = HWREG32_RW(gpio_port + GPIORIS);
+	
+	for(uint32_t pin = 0; pin < num_of_pins; pin++)
+	{
+		uint32_t active_pin = (gpio_pin >> pin) & 0x01U;
+
+		if(active_pin)
+		{
+			Gpio_ISR_callback(pin);
+		}	
+	}
+	
+	
+	
 	return;
 }
 
