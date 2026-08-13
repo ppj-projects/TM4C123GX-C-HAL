@@ -258,23 +258,24 @@ void Gpio_configure(GpioPort_t port)
 
 void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t dir)
 {
-	uint32_t dir_val = ((dir == INPUT) ? 0 : 1 ) << pin;
-	uint32_t afsel_val = 0 << pin;
-	uint32_t drive_val = 1 << pin;
-	uint32_t den_val = 1 << pin;
+	const uint32_t gpio_port = (GPIOA_BASE + (GPIO_BASE_OFFSET * port));
+	const uint32_t dir_val = ((dir == INPUT) ? 0 : 1 ) << pin;
+	const uint32_t afsel_val = 0 << pin;
+	const uint32_t drive_val = 1 << pin;
+	const uint32_t den_val = 1 << pin;
 	Gpio_configure(port);
 	
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODIR) &= ~(1 << pin);
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODIR) |= dir_val;
+	HWREG32_RW(gpio_port + GPIODIR) &= ~(1 << pin);
+	HWREG32_RW(gpio_port + GPIODIR) |= dir_val;
 	
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIOAFSEL) &= ~(1 << pin);
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIOAFSEL) |= afsel_val
+	HWREG32_RW(gpio_port + GPIOAFSEL) &= ~(1 << pin);
+	HWREG32_RW(gpio_port + GPIOAFSEL) |= afsel_val
 	
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODR4R) &= ~(1 << pin);
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODR4R) |= drive_val;
+	HWREG32_RW(gpio_port + GPIODR4R) &= ~(1 << pin);
+	HWREG32_RW(gpio_port + GPIODR4R) |= drive_val;
 	
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODEN) &= ~(1 << pin);
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * port)) + GPIODEN) |= den_val;
+	HWREG32_RW(gpio_port + GPIODEN) &= ~(1 << pin);
+	HWREG32_RW(gpio_port + GPIODEN) |= den_val;
 
 	return;
 }
@@ -282,20 +283,17 @@ void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t di
 
 static void Gpio_configure_af_peripheral(const GpioPctl_t periph_setting)
 {
-	uint32_t afsel_val = 1 << periph_setting.pin;
-	uint32_t pctl_val = periph_setting.pctl_val << (4 * periph_setting.pin);
+	const uint32_t gpio_port = (GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port));
+	const uint32_t afsel_val = 1 << periph_setting.pin;
+	const uint32_t pctl_val = periph_setting.pctl_val << (4 * periph_setting.pin);
 	Gpio_configure(periph_setting.port);
 	
 	
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOAFSEL) &=
-		~(1 << periph_setting.pin);
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOAFSEL) |=
-		afsel_val;
+	HWREG32_RW(gpio_port + GPIOAFSEL) &= ~(1 << periph_setting.pin);
+	HWREG32_RW(gpio_port + GPIOAFSEL) |= afsel_val;
 		
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOPCTL) &=
-		~(1 << periph_setting.pin);
-	HWREG32_RW((GPIOA_BASE + (GPIO_BASE_OFFSET * periph_setting.port)) + GPIOPCTL) |= 
-		pctl_val;
+	HWREG32_RW(gpio_port + GPIOPCTL) &= ~(1 << periph_setting.pin);
+	HWREG32_RW(gpio_port + GPIOPCTL) |= pctl_val;
 
 	return;
 }
