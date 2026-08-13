@@ -1,17 +1,37 @@
 #include <stdint.h>
 #include "nvic1.h"
 
+static inline uint32_t get_reg_offset(Nvic_interrupt_numb_t int_num)
+{
+	return (int_num >> 5);
+}
+
+static inline uint32_t get_bit_offset(Nvic_interrupt_numb_t int_num)
+{
+	return int_num & 0x1F;
+}
+
+static inline uint32_t get_pri_reg_offset(Nvic_interrupt_numb_t int_num)
+{
+	return int_num >> 2;
+}
+
+static inline uint32_t get_pri_bit_offset(Nvic_interrupt_numb_t int_num)
+{
+	return ((int_num & 0x3) << 4);
+}
+
 void Nvic_enable_interrupt(Nvic_interrupt_numb_t int_num, Nvic_priority_t priority, bool en)
 {
 	// NVIC registers are a concatenation of 32-bit fields for each interrupt
 	// Divide by 32 to get proper reg offset
-	uint32_t reg_offset = int_num >> 5;
+	uint32_t reg_offset = get_reg_offset(int_num);
 	
 	// Find mod 32 to find correct bit offset
-	uint32_t bit_offset = int_num & 0x1F;
+	uint32_t bit_offset = get_bit_offset(int_num);
 
-	uint32_t pri_reg_offset = int_num >> 2;
-	uint32_t pri_bit_offset = (int_num & 0x3) << 4;
+	uint32_t pri_reg_offset = get_pri_reg_offset(int_num);
+	uint32_t pri_bit_offset = get_pri_bit_offset(int_num);
 
 	if(en)
 	{
@@ -30,11 +50,11 @@ void Nvic_enable_interrupt(Nvic_interrupt_numb_t int_num, Nvic_priority_t priori
 
 void Nvic_set_interrupt_pending(int_num, bool set)
 {
-	uint32_t reg_offset = int_num >> 5;
-	uint32_t bit_offset = int_num & 0x1F;
+	uint32_t reg_offset = get_reg_offset(int_num);
+	uint32_t bit_offset = get_bit_offset(int_num);
 
-	uint32_t pri_reg_offset = int_num >> 2;
-	uint32_t pri_bit_offset = (int_num & 0x3) << 4;
+	uint32_t pri_reg_offset = get_pri_reg_offset(int_num);
+	uint32_t pri_bit_offset = get_pri_bit_offset(int_num);
 
 	if(en)
 	{
@@ -50,8 +70,8 @@ void Nvic_set_interrupt_pending(int_num, bool set)
 
 bool Nvic_is_interrupt_active(int_num)
 {
-	uint32_t reg_offset = int_num >> 5;
-	uint32_t bit_offset = int_num & 0x1F;
+	uint32_t reg_offset = get_reg_offset(int_num);
+	uint32_t bit_offset = get_bit_offset(int_num);
 	uint32_t active_val = (NVIC32_RO(ACTIVE0 + reg_offset) >> bit_offset);
 	
 	// Use a mask, get the active bit
