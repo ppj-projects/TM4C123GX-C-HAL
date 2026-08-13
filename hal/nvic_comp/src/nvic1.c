@@ -3,22 +3,22 @@
 
 static inline uint32_t get_reg_offset(Nvic_interrupt_numb_t int_num)
 {
-	return (int_num >> 5);
+	return (int_num >> NVIC_REG_SIZE_DIV);
 }
 
 static inline uint32_t get_bit_offset(Nvic_interrupt_numb_t int_num)
 {
-	return int_num & 0x1F;
+	return int_num & NVIC_REG_SIZE_MOD;
 }
 
 static inline uint32_t get_pri_reg_offset(Nvic_interrupt_numb_t int_num)
 {
-	return int_num >> 2;
+	return int_num >> NVIC_PRI_REG_SIZE_DIV;
 }
 
 static inline uint32_t get_pri_bit_offset(Nvic_interrupt_numb_t int_num)
 {
-	return ((int_num & 0x3) << 4);
+	return ((int_num & NVIC_PRI_REG_SIZE_MOD) << NVIC_PRI_REG_SIZE_MOD_OFFSET);
 }
 
 void Nvic_enable_interrupt(Nvic_interrupt_numb_t int_num, Nvic_priority_t priority, bool en)

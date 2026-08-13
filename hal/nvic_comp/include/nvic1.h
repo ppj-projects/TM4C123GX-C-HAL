@@ -77,6 +77,13 @@
 #define NVIC32_RW(x)	HWREG32_RW((NVIC_BASE) + (x))
 #define NVIC32_RO(x)	HWREG32_RO((NVIC_BASE) + (x))
 
+// NVIC constants
+#define NVIC_REG_SIZE_DIV		5
+#define NVIC_REG_SIZE_MOD		0x1F
+#define NVIC_PRI_REG_SIZE_DIV		2
+#define NVIC_PRI_REG_SIZE_MOD		0x3
+#define NVIC_PRI_REG_SIZE_MOD_OFFSET	4
+
 // Interrupt number enums
 typedef enum
 {
