@@ -201,9 +201,6 @@ typedef struct __attribute__((packed))
 	Gpiocb_func cb;
 }Gpiocb_t;
 
-// Needs to be defined by user
-extern Gpiocb_t gpio_callbacks[num_of_ports][num_of_pins];
-
 void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_func callback, Gpiocb_data data);
 
 #endif

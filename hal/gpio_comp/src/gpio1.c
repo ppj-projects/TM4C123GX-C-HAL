@@ -5,6 +5,17 @@
 
 // Gpio ISRs
 // Call the correct port and pin callback
+// Needs to be defined by user
+static Gpiocb_t gpio_callbacks[num_of_ports][num_of_pins] = 
+{
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}
+}
+
 void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_func callback, Gpiocb_data data)
 {
 	gpio_callbacks[port][pin].data = data;
