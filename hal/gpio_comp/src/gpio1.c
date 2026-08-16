@@ -6,7 +6,7 @@
 // Gpio ISRs
 // Call the correct port and pin callback
 // Needs to be defined by user
-static Gpiocb_t gpio_callbacks[num_of_ports][num_of_pins] = 
+static Gpiocb_t gpio_callbacks[MAX_GPIO_PORTS][MAX_GPIO_PIN_CHANNELS] = 
 {
 	// pin0	// pin1	// pin2	// pin3	//pin 4	// pin5	//pin6
 	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOA
