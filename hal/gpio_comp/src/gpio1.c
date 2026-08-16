@@ -47,6 +47,8 @@ void Gpio_signal_handler(GpioPort_t port)
 		}	
 	}
 	
+	// Clear the interrupts
+	HWREG32_RW(gpio_port + GPIOICR) &= 0xFFFFFFFF;
 
 	return;
 }
