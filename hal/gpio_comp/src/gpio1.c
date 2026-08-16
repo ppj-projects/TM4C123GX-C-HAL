@@ -33,11 +33,10 @@ void Gpio_ISR_callback(GpioPort_t port, GpioPinChannel_t pin)
 
 void Gpio_signal_handler(GpioPort_t port)
 {
-	const uint32_t num_of_pins = 7;
 	const uint32_t gpio_port = (GPIOA_BASE + (GPIO_BASE_OFFSET * port));
 	uint32_t gpio_pin = HWREG32_RW(gpio_port + GPIORIS);
 	
-	for(uint32_t pin = 0; pin < num_of_pins; pin++)
+	for(uint32_t pin = 0; pin < MAX_GPIO_PIN_CHANNELS; pin++)
 	{
 		uint32_t active_pin = (gpio_pin >> pin) & 0x01U;
 
