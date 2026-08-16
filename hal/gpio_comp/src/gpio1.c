@@ -5,18 +5,18 @@
 
 // Gpio ISRs
 // Call the correct port and pin callback
-void Gpio_ISR_callback()
+void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_func callback, Gpiocb_data data)
 {
-	switch(gpio_pin)
-	{
-	case pin0:
-	case pin1:
-	case pin2:
-	case pin3:
-	case pin4:
-	case pin5:
-	case pin6:
-	}
+	gpio_callbacks[port][pin].data = data;
+	gpio_callbacks[port][pin].cb = callback;
+}
+
+void Gpio_ISR_callback(GpioPort_t port, GpioPinChannel_t pin)
+{
+	if(gpio_callbacks[port][pin].cb == NULL)
+		return;
+		
+	*(gpio_callbacks[port][pin].cb)(gpio_callbacks[port][pin].data);
 }
 
 void Gpio_signal_handler(GpioPort_t port)
@@ -31,48 +31,47 @@ void Gpio_signal_handler(GpioPort_t port)
 
 		if(active_pin)
 		{
-			Gpio_ISR_callback(pin);
+			Gpio_ISR_callback(port, pin);
 		}	
 	}
 	
-	
-	
+
 	return;
 }
 
 void GpioA_ISR()
 {
-	//Gpio_signal_handler();
+	Gpio_signal_handler(GPIOA);
 	return; 
 }
 
 void GpioB_ISR()
 {
-	//Gpio_signal_handler();
+	Gpio_signal_handler(GPIOB);
 	return; 
 }
 
 void GpioC_ISR()
 {
-	//Gpio_signal_handler();
+	Gpio_signal_handler(GPIOC);
 	return; 
 }
 
 void GpioD_ISR()
 {
-	//Gpio_signal_handler();
+	Gpio_signal_handler(GPIOD);
 	return; 
 }
 
 void GpioE_ISR()
 {
-	//Gpio_signal_handler();
+	Gpio_signal_handler(GPIOE);
 	return; 
 }
 
 void GpioF_ISR()
 {
-	//Gpio_signal_handler();
+	Gpio_signal_handler(GPIOF);
 	return; 
 }
 

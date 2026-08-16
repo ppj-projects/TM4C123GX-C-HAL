@@ -194,7 +194,16 @@ void Gpio_configure_timer(GpioTimer_t timer_periph);
 
 // Application layer ISR callback registration
 typedef void* Gpiocb_data;
-typedef void (*Gpiocb_t)(void*);
-void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_t callback, Gpiocb_data data);
+typedef void (*Gpiocb_func)(void*);
+typedef struct __attribute__((packed))
+{
+	Gpiocb_data data;
+	Gpiocb_func cb;
+}Gpiocb_t;
+
+// Needs to be defined by user
+extern Gpiocb_t gpio_callbacks[num_of_ports][num_of_pins];
+
+void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_func callback, Gpiocb_data data);
 
 #endif
