@@ -8,12 +8,13 @@
 // Needs to be defined by user
 static Gpiocb_t gpio_callbacks[num_of_ports][num_of_pins] = 
 {
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, 
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}
+	// pin0	// pin1	// pin2	// pin3	//pin 4	// pin5	//pin6
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOA
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOB
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOC
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOD
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOE
+	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}  // GPIOF
 }
 
 void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_func callback, Gpiocb_data data)
