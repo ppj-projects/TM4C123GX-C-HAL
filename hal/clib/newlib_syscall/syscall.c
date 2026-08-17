@@ -2,6 +2,7 @@
 // This is running on baremetal and Newlib requires these system calls to be implemented for the library
 // Using default implementations since there isn't any being used. An error code is a graceful failure
 #include <errno.h>
+#include <stdint.h>
 #undef errno
 extern int errno;
 
