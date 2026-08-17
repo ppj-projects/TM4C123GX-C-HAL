@@ -8,7 +8,7 @@
 #define HWREG32_RO(x) (*((uint32_t volatile const *)(x)))
 
 // NVIC base address
-#define NVICCTRL_BASE	0xE000E000UL
+#define NVIC_BASE	0xE000E000UL
 
 // NVIC registers
 #define EN0		0x100U
@@ -179,24 +179,24 @@ typedef enum
 	PWM1_GEN2_nvic_int,
 	PWM1_GEN3_nvic_int,
 	PWM1_FAULT_nvic_int
-} Nvic_interrupt_numb_t;
+}Nvic_interrupt_numb_t;
 
 // NVIC priority levels
 typedef enum
 {
-	PRI0,
-	PRI1,
-	PRI2,
-	PRI3,
-	PRI4,
-	PRI5,
-	PRI6,
-	PRI7
+	PRIORITY0,
+	PRIORITY1,
+	PRIORITY2,
+	PRIORITY3,
+	PRIORITY4,
+	PRIORITY5,
+	PRIORITY6,
+	PRIORITY7
 }Nvic_priority_t;
 
 // NVIC API
 void Nvic_enable_interrupt(Nvic_interrupt_numb_t int_num, Nvic_priority_t priority, bool en);
-void Nvic_set_interrupt_pending(int_num, bool set);
-bool Nvic_is_interrupt_active(int_num);
+void Nvic_set_interrupt_pending(Nvic_interrupt_numb_t int_num, bool set);
+bool Nvic_is_interrupt_active(Nvic_interrupt_numb_t int_num);
 
 #endif

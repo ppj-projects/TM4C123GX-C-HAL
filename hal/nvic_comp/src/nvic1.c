@@ -48,7 +48,7 @@ void Nvic_enable_interrupt(Nvic_interrupt_numb_t int_num, Nvic_priority_t priori
 	return;
 }
 
-void Nvic_set_interrupt_pending(int_num, bool set)
+void Nvic_set_interrupt_pending(Nvic_interrupt_numb_t int_num, bool set)
 {
 	uint32_t reg_offset = get_reg_offset(int_num);
 	uint32_t bit_offset = get_bit_offset(int_num);
@@ -56,7 +56,7 @@ void Nvic_set_interrupt_pending(int_num, bool set)
 	uint32_t pri_reg_offset = get_pri_reg_offset(int_num);
 	uint32_t pri_bit_offset = get_pri_bit_offset(int_num);
 
-	if(en)
+	if(set)
 	{
 		NVIC32_RW(PEND0 + reg_offset) |= 1 << bit_offset;
 	}
@@ -68,7 +68,7 @@ void Nvic_set_interrupt_pending(int_num, bool set)
 	return;
 }
 
-bool Nvic_is_interrupt_active(int_num)
+bool Nvic_is_interrupt_active(Nvic_interrupt_numb_t int_num)
 {
 	uint32_t reg_offset = get_reg_offset(int_num);
 	uint32_t bit_offset = get_bit_offset(int_num);
