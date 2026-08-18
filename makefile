@@ -16,4 +16,4 @@ gpio1: $(path_hal)
 
 # Recursively call make in each directory. Start with clib
 $(path_hal):
-	$(MAKE) --directory=$@
+	$(MAKE) --directory=$@ DEVICE=$(DEVICE)

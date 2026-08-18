@@ -9,13 +9,13 @@
 static Gpiocb_t gpio_callbacks[MAX_GPIO_PORTS][MAX_GPIO_PIN_CHANNELS] = 
 {
 	// pin0	// pin1	// pin2	// pin3	//pin 4	// pin5	//pin6
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOA
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOB
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOC
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOD
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, // GPIOE
-	{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}  // GPIOF
-}
+	{{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}}, // GPIOA
+	{{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}}, // GPIOB
+	{{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}}, // GPIOC
+	{{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}}, // GPIOD
+	{{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}}, // GPIOE
+	{{ NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}, { NULL, NULL}}  // GPIOF
+};
 
 void Gpio_register_callback(GpioPort_t port, GpioPinChannel_t pin, Gpiocb_func callback, Gpiocb_data data)
 {
@@ -28,7 +28,7 @@ void Gpio_ISR_callback(GpioPort_t port, GpioPinChannel_t pin)
 	if(gpio_callbacks[port][pin].cb == NULL)
 		return;
 		
-	*(gpio_callbacks[port][pin].cb)(gpio_callbacks[port][pin].data);
+	(gpio_callbacks[port][pin].cb)(gpio_callbacks[port][pin].data);
 }
 
 void Gpio_signal_handler(GpioPort_t port)
@@ -312,7 +312,7 @@ void Gpio_configure_io(GpioPort_t port, GpioPinChannel_t pin, GpioDirection_t di
 	HWREG32_RW(gpio_port + GPIODIR) |= dir_val;
 	
 	HWREG32_RW(gpio_port + GPIOAFSEL) &= ~(1 << pin);
-	HWREG32_RW(gpio_port + GPIOAFSEL) |= afsel_val
+	HWREG32_RW(gpio_port + GPIOAFSEL) |= afsel_val;
 	
 	HWREG32_RW(gpio_port + GPIODR4R) &= ~(1 << pin);
 	HWREG32_RW(gpio_port + GPIODR4R) |= drive_val;
