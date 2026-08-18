@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "isr.h"
 #include "can_isr.h"
 #include "i2c_isr.h"
@@ -11,6 +12,8 @@ void Unused_ISR()
 	while(1);
 	return;
 }
+
+extern void startup();
 
 __attribute((weak))
 void Reset_ISR()
@@ -235,15 +238,16 @@ void I2c3_ISR()
 	return; 
 }
 
+extern uint32_t _stack_start;
 
 // CMSIS style
 typedef void (*Isr_t)(void);
 
-__attribute__((section(".isr_vectors")));
+__attribute__((section(".isr_vectors")))
 const volatile Isr_t vector_table[155] =
 {
 	// Stack pointer defined in linker script. At top of SRAM
-	(isr_t)&_stack_start,
+	(Isr_t)&_stack_start,
 
 	/* System exceptions */
 	Reset_ISR, 		// RESET
@@ -302,7 +306,7 @@ const volatile Isr_t vector_table[155] =
 	Can1_ISR,  		// CAN1
 	0, 0,  		// RESERVED[2]
 	Unused_ISR,  		// HIBERNATION MODULE
-	Usb_ISR,  		// USB
+	Unused_ISR,  		// USB
 	Unused_ISR,  		// PWM GENERATOR 3
 	Unused_ISR,  		// uDMA SOFTWARE
 	Unused_ISR,  		// uDMA ERROR
