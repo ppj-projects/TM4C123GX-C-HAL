@@ -17,3 +17,4 @@ hal_target := ../device/$(TARGET)/include
 gpio1.o: gpio1.c gpio1.h $(hal_target)/gpio_isr.h
 	/home/practice/x-tools/arm-bare_newlib_cortex_m3_nommu-eabihf/bin/arm-bare_newlib_cortex_m3_nommu-eabihf-gcc \
 	-c -I include -I $(hal_target) $< -o $@
+	mv $@ ../bin
